@@ -16,7 +16,7 @@ const Home: React.FC = () =>
 	if (loading) return <h1>Loading...</h1>
 
   return (
-    <Container>
+    <Container className='page'>
       <Head>
         <title>STEM Guy</title>
       </Head>

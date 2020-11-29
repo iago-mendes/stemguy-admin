@@ -24,13 +24,19 @@ export default createGlobalStyle`
     display: flex;
 		width: 100vw;
 		height: 100vh;
+
+		background-color: black;
   }
 
 	.page
 	{
 		height: 100vh;
-    width: 100%;
-    overflow-y: auto;
+		width: 100%;
+		overflow-y: auto;
 		overflow-x: hidden;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 `
