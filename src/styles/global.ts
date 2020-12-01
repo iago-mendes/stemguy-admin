@@ -24,8 +24,6 @@ export default createGlobalStyle`
     display: flex;
 		width: 100vw;
 		height: 100vh;
-
-		background-color: black;
   }
 
 	.page
