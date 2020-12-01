@@ -1,7 +1,12 @@
 import {useState} from 'react'
 import {useRouter} from 'next/router'
-import {BsFiles, BsImages, BsPeople} from 'react-icons/bs'
+import Link from 'next/link'
+
+import {BsImages, BsPeople} from 'react-icons/bs'
 import {AiOutlineTags} from 'react-icons/ai'
+import {FiLogOut} from 'react-icons/fi'
+import {BiUserCircle} from 'react-icons/bi'
+import {IoNewspaperOutline} from 'react-icons/io5'
 
 import Container from '../styles/components/Sidebar'
 import logo from '../assets/logo.svg'
@@ -21,26 +26,48 @@ const Sidebar: React.FC = () =>
 				<img src={logo} alt="STEM Guy" />
 			</header>
 			
-			<ul>
-				<li>
-					<BsFiles size={25} />
-					{isExpanded && <span>Posts</span>}
-				</li>
-				<li>
-					<BsImages size={25} />
-					{isExpanded && <span>Images</span>}
-				</li>
-				<li>
-					<BsPeople size={25} />
-					{isExpanded && <span>Authors</span>}
-				</li>
-				<li>
-					<AiOutlineTags size={25} />
-					{isExpanded && <span>Flags</span>}
-				</li>
-			</ul>
+			<main>
+				<ul>
+					<Link href='/' as='li'>
+						<a>
+							<IoNewspaperOutline size={25} />
+							<span>Posts</span>
+						</a>
+					</Link>
+					<Link href='/' as='li'>
+						<a>
+							<BsImages size={25} />
+							<span>Images</span>
+						</a>
+					</Link>
+					<Link href='/' as='li'>
+						<a>
+							<AiOutlineTags size={25} />
+							<span>Flags</span>
+						</a>
+					</Link>
+					<Link href='/' as='li'>
+						<a>
+							<BsPeople size={25} />
+							<span>Authors</span>
+						</a>
+					</Link>
+				</ul>
+			</main>
 
 			<footer>
+				<ul>
+					<Link href='/' as='li'>
+						<a>
+							<BiUserCircle size={25} />
+							<span>User</span>
+						</a>
+					</Link>
+					<li>
+						<FiLogOut size={25} />
+						<span>Log out</span>
+					</li>
+				</ul>
 			</footer>
     </Container>
   )
