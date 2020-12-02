@@ -4,8 +4,10 @@ import PostForm from '../components/forms/Post'
 const AddPost: React.FC = () =>
 {
 	return (
-		<Container>
-			<PostForm method='post' />
+		<Container className='page'>
+			<div className="scrollableContent">
+				<PostForm method='post' />
+			</div>
 		</Container>
 	)
 }

@@ -98,22 +98,24 @@ const PostForm: React.FC<PostFormProps> = () =>
 					onChange={e => setFlags([e.target.value])}
 				/>
 			</div>
-			<div className='field'>
+			<div className='field textareaField'>
 				<label htmlFor='description'>Description</label>
 				<textarea
 					name='description'
 					id='description'
 					value={description}
 					onChange={e => setDescription(e.target.value)}
+					rows={5}
 				/>
 			</div>
-			<div className='field'>
+			<div className='field textareaField'>
 				<label htmlFor='markdown'>Markdown</label>
 				<textarea
 					name='markdown'
 					id='markdown'
 					value={markdown}
 					onChange={e => setMarkdown(e.target.value)}
+					rows={20}
 				/>
 			</div>
 		</Container>
