@@ -6,7 +6,7 @@ const Container = styled.div`
 	justify-content: center;
 	gap: 2rem;
 
-	background-color: ${p =>p.theme.colors.primary};
+	background-color: ${p =>p.theme.colors.background};
 
 	width: 100%;
 	height: 100%;
@@ -19,10 +19,6 @@ const Container = styled.div`
 	{
 		width: 25vw;
 		height: 25vw;
-
-		background-color: #fff;
-		border-radius: 100rem;
-		padding: 0.5rem;
 	}
 
 	main
@@ -35,7 +31,7 @@ const Container = styled.div`
 
 		h1
 		{
-			color: ${p => p.theme.colors.background};
+			color: ${p => p.theme.colors.primary};
 			max-width: 25rem;
 
 			font-family: Ubuntu;
@@ -51,9 +47,9 @@ const Container = styled.div`
 			border-radius: 100rem;
 
 			border: none;
-			background-color: ${p => p.theme.colors.background};
+			background-color: ${p => p.theme.colors.primary};
 
-			color: ${p => p.theme.colors.primary};
+			color: ${p => p.theme.colors.background};
 			font-family: Ubuntu;
 			font-weight: 700;
 			font-size: 1.5rem;

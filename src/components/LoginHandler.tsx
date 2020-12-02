@@ -1,15 +1,23 @@
 import {useSession, signIn} from "next-auth/client";
 import Image from 'next/image'
+import {CSSProperties} from 'styled-components'
 
-// import Loading from './Loading'
+import Loading from './Loading'
 import Container from '../styles/components/LoginHandler'
 import logo from '../assets/logo.svg'
+
+const loadingStyles: CSSProperties =
+{
+	position: 'absolute',
+	top: 0,
+	left: 0
+}
 
 const LoginHandler: React.FC = ({children}) =>
 {
 	const [session, loading] = useSession()
 
-	if (loading) return <h1>Loading...</h1>
+	if (loading) return <Loading style={loadingStyles} />
 
 	if (session) return (
 		<>

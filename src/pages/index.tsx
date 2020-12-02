@@ -2,18 +2,13 @@ import Head from 'next/head'
 import {useSession, signIn, signOut} from 'next-auth/client'
 
 import Container from '../styles/pages/index'
-import { useEffect } from 'react'
+import Loading from '../components/Loading'
 
 const Home: React.FC = () =>
 {
 	const [session, loading] = useSession()
 
-	useEffect(() =>
-	{
-		console.log('[session]', session)
-	}, [loading])
-
-	if (loading) return <h1>Loading...</h1>
+	if (loading) return <Loading />
 
   return (
     <Container className='page'>
