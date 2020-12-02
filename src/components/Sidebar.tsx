@@ -27,25 +27,25 @@ const Sidebar: React.FC = () =>
 			
 			<main>
 				<ul>
-					<Link href='/' as='li'>
+					<Link href='/'>
 						<a>
 							<IoNewspaperOutline size={25} />
 							<span>Posts</span>
 						</a>
 					</Link>
-					<Link href='/' as='li'>
+					<Link href='/'>
 						<a>
 							<BsImages size={25} />
 							<span>Images</span>
 						</a>
 					</Link>
-					<Link href='/' as='li'>
+					<Link href='/'>
 						<a>
 							<AiOutlineTags size={25} />
 							<span>Flags</span>
 						</a>
 					</Link>
-					<Link href='/' as='li'>
+					<Link href='/'>
 						<a>
 							<BsPeople size={25} />
 							<span>Authors</span>
@@ -56,7 +56,7 @@ const Sidebar: React.FC = () =>
 
 			<footer>
 				<ul>
-					<Link href='/' as='li'>
+					<Link href='/'>
 						<a>
 							<BiUserCircle size={25} />
 							<span>User</span>

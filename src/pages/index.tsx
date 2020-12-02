@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import {GetStaticProps} from 'next'
 import {useRouter} from 'next/router'
+import {useEffect, useState} from 'react'
+import useSWR from 'swr'
 
 import {IoNewspaperOutline} from 'react-icons/io5'
 import {BiSearch} from 'react-icons/bi'
@@ -9,28 +11,45 @@ import Container from '../styles/pages/index'
 import api from '../services/api'
 import Loading from '../components/Loading'
 
-interface PostsProps
+interface Post
 {
-	posts: Array<
+	id: string
+	url_id: string
+	title: string
+	description: string
+	image:
 	{
-		id: string
-		url_id: string
-		title: string
-		description: string
-		image:
-		{
-			url: string
-			alt: string
-			width: number
-			height: number
-		},
-		flags: Array<{name: string, color: string}>
-	}>
+		url: string
+		alt: string
+		width: number
+		height: number
+	},
+	flags: Array<{name: string, color: string}>
 }
 
-const Posts: React.FC<PostsProps> = ({posts}) =>
+interface PostsProps
+{
+	posts: Array<Post>
+}
+
+const Posts: React.FC<PostsProps> = ({posts: staticPosts}) =>
 {
 	const Router = useRouter()
+	const [search, setSearch] = useState('')
+	const {data, error} = useSWR(`/api/search?q=${search}`)
+	const [posts, setPosts] = useState<Post[]>([])
+
+	useEffect(() =>
+	{
+		if (search === '' || error)
+		{
+			setPosts(staticPosts)
+			if (error)
+				console.error(error)
+		}
+		else if (data)
+			setPosts(data.posts)
+	}, [data, search, error])
 
 	if (!posts)
 		return <Loading />
@@ -48,27 +67,35 @@ const Posts: React.FC<PostsProps> = ({posts}) =>
 				</div>
 				<div className="inputField">
 					<BiSearch size={25} color='rgb(138, 138, 138)' />
-					<input type="text" name="search"/>
+					<input type="text" name="search" value={search} onChange={e => setSearch(e.target.value)} />
 				</div>
 			</header>
 
 			<div className="scroll">
-				<main>
-					{posts.map(post => (
-						<div className="post" key={post.id} onClick={() => Router.push(`/${post.url_id}`)}>
-							<div className="imgContainer">
-								<img src={post.image.url} alt={post.image.alt} />
-							</div>
-							<h1>{post.title}</h1>
-							<p>{post.description}</p>
-							<ul>
-								{post.flags.map(flag => (
-									<li key={flag.name} style={{backgroundColor: `#${flag.color}`}} >{flag.name}</li>
+			{
+				!data
+				? <Loading  />
+				: posts.length === 0
+					? <h1>No results found!</h1>
+					: (
+							<main>
+								{posts.map(post => (
+									<div className="post" key={post.id} onClick={() => Router.push(`/${post.url_id}`)}>
+										<div className="imgContainer">
+											<img src={post.image.url} alt={post.image.alt} />
+										</div>
+										<h1>{post.title}</h1>
+										<p>{post.description}</p>
+										<ul>
+											{post.flags.map(flag => (
+												<li key={flag.name} style={{backgroundColor: `#${flag.color}`}} >{flag.name}</li>
+											))}
+										</ul>
+									</div>
 								))}
-							</ul>
-						</div>
-					))}
-				</main>
+							</main>
+						)
+			}
 			</div>
 		</Container>
 	)
