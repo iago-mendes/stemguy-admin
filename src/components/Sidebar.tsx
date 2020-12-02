@@ -1,6 +1,6 @@
 import {useState} from 'react'
-import {useRouter} from 'next/router'
 import Link from 'next/link'
+import {signOut} from 'next-auth/client'
 
 import {BsImages, BsPeople} from 'react-icons/bs'
 import {AiOutlineTags} from 'react-icons/ai'
@@ -13,7 +13,6 @@ import logo from '../assets/logo.svg'
 
 const Sidebar: React.FC = () =>
 {
-	const Router = useRouter()
 	const [isExpanded, setIsExpanded] = useState(false)
 
   return (
@@ -63,7 +62,7 @@ const Sidebar: React.FC = () =>
 							<span>User</span>
 						</a>
 					</Link>
-					<li>
+					<li onClick={() => signOut()}>
 						<FiLogOut size={25} />
 						<span>Log out</span>
 					</li>
