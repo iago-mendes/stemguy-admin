@@ -6,6 +6,7 @@ import GlobalStyle from '../styles/global'
 import theme from '../styles/theme'
 import Sidebar from '../components/Sidebar'
 import LoginHandler from '../components/LoginHandler'
+import Add from '../components/Add'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) =>
 {
@@ -14,6 +15,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) =>
 			<ThemeProvider theme={theme}>
 				<LoginHandler>
 					<Sidebar />
+					<Add />
 					<Component {...pageProps} />
 					<GlobalStyle />
 				</LoginHandler>
