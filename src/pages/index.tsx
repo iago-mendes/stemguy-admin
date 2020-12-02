@@ -1,11 +1,13 @@
 import Head from 'next/head'
-import {useSession, signIn, signOut} from 'next-auth/client'
 import {GetStaticProps} from 'next'
+import {useRouter} from 'next/router'
+
+import {IoNewspaperOutline} from 'react-icons/io5'
+import {BiSearch} from 'react-icons/bi'
 
 import Container from '../styles/pages/index'
-import Loading from '../components/Loading'
 import api from '../services/api'
-import { useEffect } from 'react'
+import Loading from '../components/Loading'
 
 interface PostsProps
 {
@@ -28,15 +30,10 @@ interface PostsProps
 
 const Posts: React.FC<PostsProps> = ({posts}) =>
 {
-	const [session, loading] = useSession()
+	const Router = useRouter()
 
-	useEffect(() =>
-	{
-		if (posts)
-			console.log('[posts]', posts)
-	}, [posts])
-
-	if (loading) return <Loading />
+	if (!posts)
+		return <Loading />
 
 	return (
 		<Container className='page'>
@@ -44,18 +41,35 @@ const Posts: React.FC<PostsProps> = ({posts}) =>
 				<title>STEM Guy</title>
 			</Head>
 
-			<h1>Hello, world!</h1>
+			<header>
+				<div className="group">
+					<IoNewspaperOutline size={50} />
+					<h1>Posts</h1>
+				</div>
+				<div className="inputField">
+					<BiSearch size={25} color='rgb(138, 138, 138)' />
+					<input type="text" name="search"/>
+				</div>
+			</header>
 
-			{
-				session
-				? (
-					<>
-						<h1>You're logged!</h1>
-						<button onClick={() => signOut()} >Log out</button>
-					</>
-				)
-				: <button onClick={() => signIn('auth0')} >Login</button>
-			}
+			<div className="scroll">
+				<main>
+					{posts.map(post => (
+						<div className="post" key={post.id} onClick={() => Router.push(`/${post.url_id}`)}>
+							<div className="imgContainer">
+								<img src={post.image.url} alt={post.image.alt} />
+							</div>
+							<h1>{post.title}</h1>
+							<p>{post.description}</p>
+							<ul>
+								{post.flags.map(flag => (
+									<li key={flag.name} style={{backgroundColor: `#${flag.color}`}} >{flag.name}</li>
+								))}
+							</ul>
+						</div>
+					))}
+				</main>
+			</div>
 		</Container>
 	)
 }
