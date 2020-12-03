@@ -1,5 +1,6 @@
 import {FormEvent, useEffect, useState} from 'react'
 import Select, {OptionsType} from 'react-select'
+import {useRouter} from 'next/router'
 
 import api from '../../services/api'
 import Container, {selectStyles} from '../../styles/components/forms/Post'
@@ -47,8 +48,10 @@ interface PostFormProps
 	post?: Post
 }
 
-const PostForm: React.FC<PostFormProps> = () =>
+const PostForm: React.FC<PostFormProps> = ({method, id}) =>
 {
+	const Router = useRouter()
+
 	const [title, setTitle] = useState('')
 	const [urlId, setUrlId] = useState('')
 	const [time, setTime] = useState(0)
@@ -131,13 +134,36 @@ const PostForm: React.FC<PostFormProps> = () =>
 		}
 	}
 
-	async function handleSubmit(e: FormEvent)
+	async function handleSubmit()
 	{
-		e.preventDefault()
+		const data =
+		{
+			title,
+			url_id: urlId,
+			time,
+			image,
+			author,
+			flags,
+			description,
+			markdown
+		}
+
+		if (method === 'post')
+			await api.post('posts', data).then(() =>
+			{
+				alert('Post created successfully!')
+				Router.back()
+			})
+		else if (method === 'put')
+			await api.put(`posts/${id}`, data).then(() =>
+			{
+				alert('Post edited successfully!')
+				Router.back()
+			})
 	}
 
 	return (
-		<Container onSubmit={handleSubmit} >
+		<Container onSubmit={e => e.preventDefault()} >
 			<div className='field'>
 				<label htmlFor='title'>Title</label>
 				<input
@@ -226,6 +252,10 @@ const PostForm: React.FC<PostFormProps> = () =>
 					rows={20}
 					placeholder='Type your markdown here'
 				/>
+			</div>
+			<div className="buttons">
+				<button onClick={Router.back} >Cancel</button>
+				<button onClick={handleSubmit} >Submit</button>
 			</div>
 		</Container>
 	)

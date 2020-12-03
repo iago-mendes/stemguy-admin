@@ -76,6 +76,47 @@ const Container = styled.form`
 	{
 		width: 100%;
 	}
+
+	.buttons
+	{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+
+		width: 100%;
+		padding: 2rem;
+
+		button
+		{
+			width: 15rem;
+			height: 5rem;
+			
+			font-family: Ubuntu;
+			font-weight: 700;
+			font-size: 1.75rem;
+
+			background-color: ${p => p.theme.colors.primary};
+			color: ${p => p.theme.colors.background};
+			
+			border: none;
+			border-radius: 2rem;
+			
+			cursor: pointer;
+			transition: 0.5s;
+			
+			:hover
+			{
+				background-color: rgb(89, 211, 89);
+				color: #000;
+			}
+
+			:first-of-type:hover
+			{
+				background-color:  rgb(201, 64, 64);
+			}
+		}
+	}
 `
 
 export const selectStyles: Styles =
