@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import {Styles} from 'react-select'
-import { fontsize } from '*.jpg'
 
 const Container = styled.form`
 	display: flex;
@@ -103,12 +102,12 @@ const Container = styled.form`
 			border-radius: 2rem;
 			
 			cursor: pointer;
-			transition: 0.5s;
+			transition: 0.25s;
 			
 			:hover
 			{
 				background-color: rgb(89, 211, 89);
-				color: #000;
+				color: ${p => p.theme.colors.primary};
 			}
 
 			:first-of-type:hover
@@ -146,7 +145,9 @@ export const selectStyles: Styles =
 		...provided,
 
 		cursor: 'pointer',
+		borderWidth: '2px',
 		borderColor: state.isFocused ? '#0D2C54' : '#31313140',
+		transition: '0.25s',
 
 		fontFamily: 'Roboto',
 		fontSize: '1.5rem'

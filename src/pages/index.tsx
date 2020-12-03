@@ -11,7 +11,7 @@ import Container from '../styles/pages/index'
 import api from '../services/api'
 import Loading from '../components/Loading'
 
-interface Post
+export interface Post
 {
 	id: string
 	url_id: string

@@ -48,7 +48,7 @@ interface PostFormProps
 	post?: Post
 }
 
-const PostForm: React.FC<PostFormProps> = ({method, id}) =>
+const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 {
 	const Router = useRouter()
 
@@ -100,6 +100,21 @@ const PostForm: React.FC<PostFormProps> = ({method, id}) =>
 			setFlagOptions(tmp)
 		})
 	}, [])
+
+	useEffect(() =>
+	{
+		if (post)
+		{
+			setTitle(post.title)
+			setUrlId(post.url_id)
+			setTime(post.time)
+			setImage(post.image)
+			setAuthor(post.author)
+			setFlags(post.flags)
+			setDescription(post.description)
+			setMarkdown(post.markdown)
+		}
+	}, [post])
 
 	function handleImageChange(e: ImageOption)
 	{
@@ -201,6 +216,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id}) =>
 				<Select
 					name='image'
 					id='image'
+					value={imageOptions.find(img => img.value === image)}
 					onChange={handleImageChange}
 					options={imageOptions}
 					styles={selectStyles}
@@ -212,6 +228,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id}) =>
 				<Select
 					name='author'
 					id='author'
+					value={authorOptions.find(atr => atr.value === author)}
 					onChange={handleAuthorChange}
 					options={authorOptions}
 					styles={selectStyles}
@@ -223,6 +240,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id}) =>
 				<Select
 					name='flags'
 					id='flags'
+					value={flagOptions.filter(flg => flags.includes(flg.value))}
 					onChange={handleFlagsChange}
 					options={flagOptions}
 					hideSelectedOptions

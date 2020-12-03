@@ -11,7 +11,6 @@ const Add: React.FC = () =>
 	useEffect(() =>
 	{
 		const path = Router.pathname
-		console.log('[path]', path)
 		setPage(path)
 	}, [Router])
 
