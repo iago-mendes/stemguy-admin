@@ -1,10 +1,11 @@
 import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
 
-import Container from '../styles/pages/add'
+import Container from '../styles/pages/[post]'
 import PostForm from '../components/forms/Post'
 import {Post} from '../components/forms/Post'
 import api from '../services/api'
+import Delete from '../components/Delete'
 
 const EditPost: React.FC = () =>
 {
@@ -45,6 +46,7 @@ const EditPost: React.FC = () =>
 
 	return (
 		<Container className='page'>
+			<Delete collection='posts' id={id} />
 			<div className="scrollableContent">
 				<PostForm method='put' id={id} post={post} />
 			</div>
