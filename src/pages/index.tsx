@@ -10,6 +10,7 @@ import {BiSearch} from 'react-icons/bi'
 import Container from '../styles/pages/index'
 import api from '../services/api'
 import Loading from '../components/Loading'
+import Add from '../components/Add'
 
 export interface Post
 {
@@ -58,6 +59,8 @@ const Posts: React.FC<PostsProps> = ({posts: staticPosts}) =>
 			<Head>
 				<title>STEM Guy</title>
 			</Head>
+
+			<Add />
 
 			<header>
 				<div className="group">
@@ -109,7 +112,8 @@ export const getStaticProps: GetStaticProps = async ctx =>
 	const {data: posts} = await api.get('posts')
 
 	return {
-		props: {posts}
+		props: {posts},
+		revalidate: 1
 	}
 }
 

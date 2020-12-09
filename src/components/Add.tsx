@@ -22,9 +22,6 @@ const Add: React.FC = () =>
 			Router.push(`${page}/add`)
 	}
 
-	if (!['/', '/images', '/tags', '/authors'].includes(page))
-		return null
-
 	return (
 		<Container title='Add' onClick={() => handleClick()} >
 			<FiPlus size={30} />
