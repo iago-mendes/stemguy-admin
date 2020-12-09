@@ -77,7 +77,8 @@ const Container = styled.div`
 			{
 				z-index: 1;
 				background-color: #fff;
-				width: fit-content;
+				width: 100%;
+				max-width: 35rem;
 				height: 100%;
 				display: flex;
 				flex-direction: column;
@@ -87,41 +88,45 @@ const Container = styled.div`
 				border-radius: 2rem;
 				cursor: pointer;
 				transition: 0.25s;
-
+				
 				:hover
 				{
 					transform: scale(1.01);
 					box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
 				}
-
+				
 				.imgContainer
 				{
 					width: 100%;
-					height: 50%;
+					height: 40%;
 					display: flex;
 					align-items: center;
 					justify-content: center;
-
+					
 					img
 					{
-						height: 100%;
+						max-height: 100%;
+						max-width: 100%;
 					}
 				}
-
+				
 				h1
 				{
-					max-height: 10%;
+					height: 20%;
+					width: 100%;
+					text-align: center;
 					font-family: Ubuntu;
 					font-size: 2rem;
 				}
-
+				
 				p
 				{
-					max-height: 20%;
+					height: 20%;
+					width: 100%;
 					font-family: Roboto;
 					font-size: 1rem;
 				}
-
+				
 				ul
 				{
 					display: flex;
@@ -129,7 +134,7 @@ const Container = styled.div`
 					justify-content: space-around;
 					height: 20%;
 					width: 100%;
-					padding: 1rem;
+					overflow-x: auto;
 					
 					li
 					{
@@ -141,6 +146,23 @@ const Container = styled.div`
 						font-size: 1rem;
 					}
 				}
+			}
+		}
+
+		.noResults
+		{
+			width: 100%;
+			height: 85vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			
+			h1
+			{
+				color: ${p => p.theme.colors.primary};
+				font-family: Ubuntu;
+				font-weight: 700;
+				font-size: 3rem;
 			}
 		}
 	}

@@ -37,19 +37,18 @@ const Posts: React.FC<PostsProps> = ({posts: staticPosts}) =>
 	const Router = useRouter()
 	const [search, setSearch] = useState('')
 	const {data, error} = useSWR(`/api/search?q=${search}`)
-	const [posts, setPosts] = useState<Post[]>([])
+	const [posts, setPosts] = useState<Post[]>(staticPosts)
 
 	useEffect(() =>
 	{
-		if (search === '' || error)
+		if (data)
+			setPosts(data.posts)
+		else if (error)
 		{
 			setPosts(staticPosts)
-			if (error)
-				console.error(error)
+			console.error(error)
 		}
-		else if (data)
-			setPosts(data.posts)
-	}, [data, search, error])
+	}, [data, error])
 
 	if (!posts)
 		return <Loading />
@@ -73,10 +72,14 @@ const Posts: React.FC<PostsProps> = ({posts: staticPosts}) =>
 
 			<div className="scroll">
 			{
-				!data
+				!data && search !== ''
 				? <Loading  />
 				: posts.length === 0
-					? <h1>No results found!</h1>
+					? (
+						<div className="noResults">
+							<h1>No results found!</h1>
+						</div>
+					)
 					: (
 							<main>
 								{posts.map(post => (
