@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import {useEffect, useState} from 'react'
 import useSWR from 'swr'
+import {useRouter} from 'next/router'
 
 import Header from '../../components/Header'
 import api from '../../services/api'
@@ -16,6 +17,8 @@ interface FlagsProps
 
 const Flags: React.FC<FlagsProps> = ({flags: staticFlags}) =>
 {
+	const Router = useRouter()
+
 	const [search, setSearch] = useState('')
 	const {data, error} = useSWR('/api/getFlags')
 	const [flags, setFlags] = useState<Flag[]>(staticFlags)
@@ -43,7 +46,12 @@ const Flags: React.FC<FlagsProps> = ({flags: staticFlags}) =>
 
 			<main>
 				{flags.map(flag => (
-					<div style={{backgroundColor: `#${flag.color}`}} className='flag' key={flag._id} >
+					<div
+						style={{backgroundColor: `#${flag.color}`}}
+						className='flag'
+						key={flag._id}
+						onClick={() => Router.push(`flags/${flag._id}`)}
+					>
 						<h1>{flag.name}</h1>
 					</div>
 				))}

@@ -11,15 +11,13 @@ export interface Flag
 	color: string
 }
 
-interface PostFormProps
+interface FlagFormProps
 {
 	method: string
-	
-	id?: string
 	flag?: Flag
 }
 
-const PostForm: React.FC<PostFormProps> = ({method, id, flag}) =>
+const FlagForm: React.FC<FlagFormProps> = ({method, flag}) =>
 {
 	const Router = useRouter()
 
@@ -46,7 +44,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, flag}) =>
 				Router.back()
 			})
 		else if (method === 'put')
-			await api.put(`flags/${id}`, data).then(() =>
+			await api.put(`flags/${flag._id}`, data).then(() =>
 			{
 				alert('Flag edited successfully!')
 				Router.back()
@@ -83,4 +81,4 @@ const PostForm: React.FC<PostFormProps> = ({method, id, flag}) =>
 	)
 }
 
-export default PostForm
+export default FlagForm
