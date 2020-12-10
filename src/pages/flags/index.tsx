@@ -6,6 +6,7 @@ import useSWR from 'swr'
 import Header from '../../components/Header'
 import api from '../../services/api'
 import Container from '../../styles/pages/flags/index'
+import Add from '../../components/Add'
 
 interface Flag
 {
@@ -22,7 +23,7 @@ interface FlagsProps
 const Flags: React.FC<FlagsProps> = ({flags: staticFlags}) =>
 {
 	const [search, setSearch] = useState('')
-	const {data, error, revalidate} = useSWR('/api/getFlags')
+	const {data, error} = useSWR('/api/getFlags')
 	const [flags, setFlags] = useState<Flag[]>(staticFlags)
 
 	useEffect(() =>
@@ -36,8 +37,6 @@ const Flags: React.FC<FlagsProps> = ({flags: staticFlags}) =>
 		}
 	}, [data, error])
 
-	useEffect(() => console.log('[flags]', flags), [flags])
-
 	return (
 		<Container className='page'>
 			<Head>
@@ -46,7 +45,15 @@ const Flags: React.FC<FlagsProps> = ({flags: staticFlags}) =>
 
 			<Header display='Flags' search={search} setSearch={setSearch} />
 
-			<h1>Flags</h1>
+			<Add />
+
+			<main>
+				{flags.map(flag => (
+					<div style={{backgroundColor: `#${flag.color}`}} className='flag' key={flag._id} >
+						<h1>{flag.name}</h1>
+					</div>
+				))}
+			</main>
 		</Container>
 	)
 }
