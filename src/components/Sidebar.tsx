@@ -39,7 +39,7 @@ const Sidebar: React.FC = () =>
 							<span>Images</span>
 						</a>
 					</Link>
-					<Link href='/'>
+					<Link href='/flags'>
 						<a>
 							<AiOutlineTags size={25} />
 							<span>Flags</span>
