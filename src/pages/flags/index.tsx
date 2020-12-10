@@ -7,13 +7,7 @@ import Header from '../../components/Header'
 import api from '../../services/api'
 import Container from '../../styles/pages/flags/index'
 import Add from '../../components/Add'
-
-interface Flag
-{
-	_id: string
-	name: string
-	color: string
-}
+import {Flag} from '../../components/forms/Flag'
 
 interface FlagsProps
 {
