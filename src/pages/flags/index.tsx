@@ -47,7 +47,7 @@ const Flags: React.FC<FlagsProps> = ({flags: staticFlags}) =>
 			<main>
 				{flags.map(flag => (
 					<div
-						style={{backgroundColor: `#${flag.color}`}}
+						style={{backgroundColor: flag.color}}
 						className='flag'
 						key={flag._id}
 						onClick={() => Router.push(`flags/${flag._id}`)}

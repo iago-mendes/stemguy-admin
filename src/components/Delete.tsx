@@ -16,12 +16,12 @@ const Delete: React.FC<DeleteProps> = ({collection, id}) =>
 
 	async function handleClick()
 	{
-		const yes = confirm('Are you sure you want to delete this post?')
+		const yes = confirm('Are you sure you want to delete this item?')
 		if (yes)
 			await api.delete(`${collection}/${id}`)
 				.then(() =>
 				{
-					alert('Post deleted successfully!')
+					alert('Item deleted successfully!')
 					Router.back()
 				})
 				.catch(err =>
