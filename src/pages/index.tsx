@@ -11,6 +11,7 @@ import Container from '../styles/pages/index'
 import api from '../services/api'
 import Loading from '../components/Loading'
 import Add from '../components/Add'
+import Header from '../components/Header'
 
 export interface Post
 {
@@ -60,18 +61,9 @@ const Posts: React.FC<PostsProps> = ({posts: staticPosts}) =>
 				<title>STEM Guy</title>
 			</Head>
 
-			<Add />
+			<Header display='Posts' search={search} setSearch={setSearch} />
 
-			<header>
-				<div className="group">
-					<IoNewspaperOutline size={50} />
-					<h1>Posts</h1>
-				</div>
-				<div className="inputField">
-					<BiSearch size={25} color='rgb(138, 138, 138)' />
-					<input type="text" name="search" value={search} onChange={e => setSearch(e.target.value)} />
-				</div>
-			</header>
+			<Add />
 
 			<div className="scroll">
 			{
