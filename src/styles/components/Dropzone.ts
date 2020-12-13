@@ -1,29 +1,29 @@
 import styled from 'styled-components'
 
 const Container = styled.div`
-	width: 50rem;
-	height: 50rem;
+	width: 100%;
+	height: 30rem;
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
-	background-color: #fff;
+	background-color: ${p => p.theme.colors.background};
 	border-radius: 1rem;
 	outline: 0;
 
 	cursor: pointer;
-	transition: 0.5s;
+	transition: 0.25s;
 
 	:hover
 	{
-		transform: scale(1.05);
+		transform: scale(1.01);
 	}
 
 	img
 	{
-		width: 100%;
-		height: 100%; 
+		max-width: 100%;
+		max-height: 100%; 
 		object-fit: cover;
 	}
 

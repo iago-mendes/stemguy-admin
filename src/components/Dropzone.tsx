@@ -9,15 +9,19 @@ interface Props
 {
 	shownFileUrl?: string
 	onFileUploaded: (file: File) => void
+
+	name?: string
+	id?: string
 }
 
-const Dropzone: React.FC<Props> = ({shownFileUrl, onFileUploaded}) =>
+const Dropzone: React.FC<Props> = ({shownFileUrl, onFileUploaded, name, id}) =>
 {
 	const [selectedFileUrl, setSelectedFileUrl] = useState('')
 
 	useEffect(() =>
 	{
-		setSelectedFileUrl(shownFileUrl)
+		if (shownFileUrl)
+			setSelectedFileUrl(shownFileUrl)
 	}, [shownFileUrl])
 
 	const onDrop = useCallback(acceptedFiles =>
@@ -32,10 +36,10 @@ const Dropzone: React.FC<Props> = ({shownFileUrl, onFileUploaded}) =>
 
 return (
 	<Container {...getRootProps()}>
-		<input {...getInputProps()} accept='image/*' />
+		<input {...getInputProps()} accept='image/*' name={name} id={id} />
 		{
 			selectedFileUrl !== ''
-			? <img src={selectedFileUrl} alt="Point thumbnail" />
+			? <img src={selectedFileUrl} alt='Image thumbnail' />
 			: (
 				<p>
 					<FiUpload />

@@ -49,7 +49,7 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 					<div
 						className='image'
 						key={image.id}
-						onClick={() => Router.push(`Images/${image.id}`)}
+						onClick={() => Router.push(`images/${image.id}`)}
 					>
 						<div className="img">
 							<img src={image.url} alt={image.alt} />

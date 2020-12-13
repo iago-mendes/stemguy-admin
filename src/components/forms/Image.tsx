@@ -62,7 +62,14 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 
 	return (
 		<Container onSubmit={e => e.preventDefault()} >
-			<Dropzone onFileUploaded={setImageFile} />
+			<div className='field'>
+				<label htmlFor='imageFile'>Image file</label>
+				<Dropzone
+					name='imageFile'
+					id='imageFile'
+					onFileUploaded={setImageFile}
+				/>
+			</div>
 
 			<div className='field'>
 				<label htmlFor='alt'>Alternative text</label>
@@ -78,7 +85,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 			<div className='field'>
 				<label htmlFor='credit'>Credit text</label>
 				<input
-					type='credit'
+					type='text'
 					name='credit'
 					id='credit'
 					value={credit}
@@ -89,7 +96,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 			<div className='field'>
 				<label htmlFor='creditLink'>Credit link</label>
 				<input
-					type='creditLink'
+					type='text'
 					name='creditLink'
 					id='creditLink'
 					value={creditLink}

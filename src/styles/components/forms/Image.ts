@@ -28,29 +28,18 @@ const Container = styled.form`
 			font-size: 1.5rem;
 		}
 
-		input[type=text]
+		input
 		{
 			border: none;
 			border-bottom: ${p => `${p.theme.colors.text}40`} 2px solid;
 
-			height: 2.5rem;
 			font-family: Roboto;
 			font-size: 2rem;
 			color: ${p => p.theme.colors.text};
 
 			padding: 1rem;
-		}
-
-		input[type=color]
-		{
-			border: ${p => `${p.theme.colors.text}40`} 2px solid;
-
-			cursor: pointer;
-		}
-
-		input
-		{
 			width: 100%;
+			height: 2.5rem;
 
 			transition: 0.25s;
 
