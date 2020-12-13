@@ -17,10 +17,19 @@ export interface Image
 	date: string
 }
 
+export interface ImageCRUD
+{
+	id: string
+	url: string
+	alt: string
+	credit: string
+	creditLink: string
+}
+
 interface ImageFormProps
 {
 	method: string
-	image?: Image
+	image?: ImageCRUD
 }
 
 const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
@@ -68,6 +77,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 					name='imageFile'
 					id='imageFile'
 					onFileUploaded={setImageFile}
+					shownFileUrl={image.url && image.url}
 				/>
 			</div>
 
