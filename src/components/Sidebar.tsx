@@ -33,7 +33,7 @@ const Sidebar: React.FC = () =>
 							<span>Posts</span>
 						</a>
 					</Link>
-					<Link href='/'>
+					<Link href='/images'>
 						<a>
 							<BsImages size={25} />
 							<span>Images</span>
