@@ -4,9 +4,6 @@ import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
 import useSWR from 'swr'
 
-import {IoNewspaperOutline} from 'react-icons/io5'
-import {BiSearch} from 'react-icons/bi'
-
 import Container from '../styles/pages/index'
 import api from '../services/api'
 import Loading from '../components/Loading'
@@ -86,7 +83,7 @@ const Posts: React.FC<PostsProps> = ({posts: staticPosts}) =>
 										<p>{post.description}</p>
 										<ul>
 											{post.flags.map(flag => (
-												<li key={flag.name} style={{backgroundColor: `#${flag.color}`}} >{flag.name}</li>
+												<li key={flag.name} style={{backgroundColor: `${flag.color}`}} >{flag.name}</li>
 											))}
 										</ul>
 									</div>
