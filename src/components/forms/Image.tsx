@@ -55,6 +55,12 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 	{
 		const data = new FormData()
 
+		if (imageFile)
+			data.append('image', imageFile)
+		data.append('alt', alt)
+		data.append('credit', credit)
+		data.append('creditLink', creditLink)
+
 		if (method === 'post')
 			await api.post('images', data).then(() =>
 			{
@@ -77,7 +83,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 					name='imageFile'
 					id='imageFile'
 					onFileUploaded={setImageFile}
-					shownFileUrl={image.url && image.url}
+					shownFileUrl={image && image.url}
 				/>
 			</div>
 
