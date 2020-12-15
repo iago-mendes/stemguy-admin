@@ -29,6 +29,8 @@ const Container = styled.div`
 			border-radius: 2rem;
 			padding: 1rem;
 
+			position: relative;
+
 			cursor: pointer;
 			transition: 0.25s;
 			
@@ -70,6 +72,24 @@ const Container = styled.div`
 				font-size: 1.5rem;
 
 				color: ${p => p.theme.colors.text};
+			}
+
+			.copy
+			{
+				position: absolute;
+				right: 0.5rem;
+				bottom: 0.5rem;
+
+				border-radius: 10rem;
+				padding: 0.5rem;
+				
+				color: ${p => p.theme.colors.text};
+				transition: 0.25s;
+
+				:hover
+				{
+					background-color: rgba(0,0,0,0.25);
+				}
 			}
 		}
 	}

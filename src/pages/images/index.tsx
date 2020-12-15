@@ -1,9 +1,10 @@
 import {GetStaticProps} from 'next'
 import Head from 'next/head'
-import {useEffect, useState} from 'react'
+import {useEffect, useState, MouseEvent as ReactMouseEvent} from 'react'
 import useSWR from 'swr'
 import {useRouter} from 'next/router'
 import NextImage from 'next/image'
+import {FiCopy} from 'react-icons/fi'
 
 import Header from '../../components/Header'
 import api from '../../services/api'
@@ -35,6 +36,28 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 		}
 	}, [data, error])
 
+	function handleImageClick(e: ReactMouseEvent<HTMLDivElement, MouseEvent>, id: string)
+	{
+		const copy = ['[object HTMLSpanElement]', '[object SVGSVGElement]']
+		if (!copy.includes(String(e.target)))
+			Router.push(`/images/${id}`)
+	}
+
+	function handleCopyImg(image: Image)
+	{
+		const Img = `<Img src='${image.url}' alt='${image.alt}' credit='${image.credit}' creditLink='${image.creditLink}' width=${image.width} height=${image.height} />`
+
+		document.addEventListener('copy', (e: ClipboardEvent) =>
+		{
+			e.clipboardData?.setData('text/plain', Img)
+			e.preventDefault()
+		})
+
+		document.execCommand('copy')
+		alert('Img component copied!')
+		document.removeEventListener('copy', () => {})
+	}
+
 	return (
 		<Container className='page'>
 			<Head>
@@ -50,7 +73,7 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 					<div
 						className='image'
 						key={image.id}
-						onClick={() => Router.push(`images/${image.id}`)}
+						onClick={e => handleImageClick(e, image.id)}
 					>
 						<div
 							className="img"
@@ -61,10 +84,12 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 								width={image.width}
 								height={image.width}
 								quality={10}
-								className='NextImageClass'
 							/>
 						</div>
 						<h1>{image.alt}</h1>
+						<span className="copy" onClick={() => handleCopyImg(image)}>
+							<FiCopy size={15} />
+						</span>
 					</div>
 				))}
 			</main>
