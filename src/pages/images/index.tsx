@@ -3,6 +3,7 @@ import Head from 'next/head'
 import {useEffect, useState} from 'react'
 import useSWR from 'swr'
 import {useRouter} from 'next/router'
+import NextImage from 'next/image'
 
 import Header from '../../components/Header'
 import api from '../../services/api'
@@ -51,8 +52,21 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 						key={image.id}
 						onClick={() => Router.push(`images/${image.id}`)}
 					>
-						<div className="img">
-							<img src={image.url} alt={image.alt} />
+						<div
+							className="img"
+							// style={{width: `calc(${image.width} / ${image.height} * 80%)`}}
+						>
+							<NextImage
+								src={image.url}
+								alt={image.alt}
+								width={image.width}
+								height={image.width}
+								// layout='responsive'
+								// layout='fill'
+								quality={10}
+								// styles={{}}
+								className='NextImageClass'
+							/>
 						</div>
 						<h1>{image.alt}</h1>
 					</div>

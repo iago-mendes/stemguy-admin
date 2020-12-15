@@ -48,11 +48,14 @@ const Container = styled.div`
 				align-items: center;
 				justify-content: center;
 
+				div
+				{
+					width: 100%;
+					height: 100%;
+				}
+
 				img
 				{
-					max-width: 100%;
-					max-height: 100%;
-
 					border-radius: 1rem;
 				}
 			}
