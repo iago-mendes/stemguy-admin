@@ -54,17 +54,13 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 					>
 						<div
 							className="img"
-							// style={{width: `calc(${image.width} / ${image.height} * 80%)`}}
 						>
 							<NextImage
 								src={image.url}
 								alt={image.alt}
 								width={image.width}
 								height={image.width}
-								// layout='responsive'
-								// layout='fill'
 								quality={10}
-								// styles={{}}
 								className='NextImageClass'
 							/>
 						</div>
