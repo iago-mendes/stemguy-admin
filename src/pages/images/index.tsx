@@ -43,9 +43,18 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 			Router.push(`/images/${id}`)
 	}
 
+	function quotes(text: string)
+	{
+		if (text.includes("'"))
+			return `"${text}"`
+		else
+			return `'${text}'`
+	}
+
 	function handleCopyImg(image: Image)
 	{
-		const Img = `<Img src='${image.url}' alt='${image.alt}' credit='${image.credit}' creditLink='${image.creditLink}' width=${image.width} height=${image.height} />`
+		const Img =
+			`<Img url=${quotes(image.url)} alt=${quotes(image.alt)} credit=${quotes(image.credit)} creditLink=${quotes(image.creditLink)} width=${image.width} height=${image.height} />`
 
 		document.addEventListener('copy', (e: ClipboardEvent) =>
 		{
