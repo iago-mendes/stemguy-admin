@@ -10,9 +10,12 @@ const search: NextApiHandler = async (req, res) =>
 
 	const paginate =
 	{
-		page: headers.page,
-		total: headers.totalPages
+		page: Number(headers.page),
+		total: Number(headers.totalpages)
 	}
+
+	console.log('[paginate]', paginate)
+	console.log('[headers]', headers)
 
 	res.statusCode = 200
 	res.setHeader('Content-Type', 'application/json')

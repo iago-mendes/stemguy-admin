@@ -11,6 +11,8 @@ import api from '../../services/api'
 import Container from '../../styles/pages/images/index'
 import Add from '../../components/Add'
 import {Image} from '../../components/forms/Image'
+import PaginateFooter from '../../components/PaginateFooter'
+import Loading from '../../components/Loading'
 
 interface ImagesProps
 {
@@ -24,6 +26,7 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 	const [search, setSearch] = useState('')
 	const [page, setPage] = useState(1)
 	const [totalPages, setTotalPages] = useState(1)
+	const [loading, setLoading] = useState(false)
 
 	const {data, error} = useSWR(`/api/getImages?search=${search}&page=${page}`)
 	const [images, setImages] = useState<Image[]>(staticImages)
@@ -35,15 +38,24 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 			setImages(data.images)
 			setPage(data.paginate.page)
 			setTotalPages(data.paginate.total)
+			setLoading(false)
 		}
 		else if (error)
 		{
 			setImages(staticImages)
 			setPage(1)
 			setTotalPages(1)
+			setLoading(false)
+
 			console.error(error)
 		}
 	}, [data, error])
+
+	useEffect(() =>
+	{
+		if (search !== '' || page !==1)
+			setLoading(true)
+	}, [search, page])
 
 	function handleImageClick(e: ReactMouseEvent<HTMLDivElement, MouseEvent>, id: string)
 	{
@@ -87,30 +99,35 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 			<Add />
 
 			<main>
-				{images.map(image => (
-					<div
-						className='image'
-						key={image.id}
-						onClick={e => handleImageClick(e, image.id)}
-					>
+				{
+					loading
+					? <Loading />
+					: images.map(image => (
 						<div
-							className="img"
+							className='image'
+							key={image.id}
+							onClick={e => handleImageClick(e, image.id)}
 						>
-							<NextImage
-								src={image.url}
-								alt={image.alt}
-								width={image.width}
-								height={image.width}
-								quality={10}
-							/>
+							<div
+								className="img"
+							>
+								<NextImage
+									src={image.url}
+									alt={image.alt}
+									width={image.width}
+									height={image.width}
+									quality={10}
+								/>
+							</div>
+							<h1>{image.alt}</h1>
+							<span className="copy" onClick={() => handleCopyImg(image)}>
+								<FiCopy size={15} />
+							</span>
 						</div>
-						<h1>{image.alt}</h1>
-						<span className="copy" onClick={() => handleCopyImg(image)}>
-							<FiCopy size={15} />
-						</span>
-					</div>
 				))}
 			</main>
+
+			<PaginateFooter page={page} setPage={setPage} totalPages={totalPages} />
 		</Container>
 	)
 }
