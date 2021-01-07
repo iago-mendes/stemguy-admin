@@ -4,6 +4,7 @@ const Container = styled.div`
 	main
 	{
 		height: fit-content;
+		min-height: 80vh;
 		width: 100%;
 		padding: 5rem;
 

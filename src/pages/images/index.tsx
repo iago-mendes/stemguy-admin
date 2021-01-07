@@ -26,9 +26,8 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 	const [search, setSearch] = useState('')
 	const [page, setPage] = useState(1)
 	const [totalPages, setTotalPages] = useState(1)
-	const [loading, setLoading] = useState(false)
 
-	const {data, error} = useSWR(`/api/getImages?search=${search}&page=${page}`)
+	const {data, error, revalidate} = useSWR(`/api/getImages?search=${search}&page=${page}`)
 	const [images, setImages] = useState<Image[]>(staticImages)
 
 	useEffect(() =>
@@ -38,24 +37,16 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 			setImages(data.images)
 			setPage(data.paginate.page)
 			setTotalPages(data.paginate.total)
-			setLoading(false)
 		}
 		else if (error)
 		{
 			setImages(staticImages)
 			setPage(1)
 			setTotalPages(1)
-			setLoading(false)
 
 			console.error(error)
 		}
 	}, [data, error])
-
-	useEffect(() =>
-	{
-		if (search !== '' || page !==1)
-			setLoading(true)
-	}, [search, page])
 
 	function handleImageClick(e: ReactMouseEvent<HTMLDivElement, MouseEvent>, id: string)
 	{
@@ -100,30 +91,36 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 
 			<main>
 				{
-					loading
+					!data && search !== ''
 					? <Loading />
-					: images.map(image => (
-						<div
-							className='image'
-							key={image.id}
-							onClick={e => handleImageClick(e, image.id)}
-						>
-							<div
-								className="img"
-							>
-								<NextImage
-									src={image.url}
-									alt={image.alt}
-									width={image.width}
-									height={image.width}
-									quality={10}
-								/>
+					: images.length === 0 && search !== ''
+						? (
+							<div className="noResults">
+								<h1>No results found!</h1>
 							</div>
-							<h1>{image.alt}</h1>
-							<span className="copy" onClick={() => handleCopyImg(image)}>
-								<FiCopy size={15} />
-							</span>
-						</div>
+						)
+						: images.map(image => (
+							<div
+								className='image'
+								key={image.id}
+								onClick={e => handleImageClick(e, image.id)}
+							>
+								<div
+									className="img"
+								>
+									<NextImage
+										src={image.url}
+										alt={image.alt}
+										width={image.width}
+										height={image.width}
+										quality={10}
+									/>
+								</div>
+								<h1>{image.alt}</h1>
+								<span className="copy" onClick={() => handleCopyImg(image)}>
+									<FiCopy size={15} />
+								</span>
+							</div>
 				))}
 			</main>
 
