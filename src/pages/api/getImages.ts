@@ -14,9 +14,6 @@ const search: NextApiHandler = async (req, res) =>
 		total: Number(headers.totalpages)
 	}
 
-	console.log('[paginate]', paginate)
-	console.log('[headers]', headers)
-
 	res.statusCode = 200
 	res.setHeader('Content-Type', 'application/json')
 	res.end(JSON.stringify({images, paginate}))
