@@ -22,16 +22,25 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 	const Router = useRouter()
 
 	const [search, setSearch] = useState('')
-	const {data, error} = useSWR('/api/getImages')
+	const [page, setPage] = useState(1)
+	const [totalPages, setTotalPages] = useState(1)
+
+	const {data, error} = useSWR(`/api/getImages?search=${search}&page=${page}`)
 	const [images, setImages] = useState<Image[]>(staticImages)
 
 	useEffect(() =>
 	{
 		if (data)
-			setImages(data)
+		{
+			setImages(data.images)
+			setPage(data.paginate.page)
+			setTotalPages(data.paginate.total)
+		}
 		else if (error)
 		{
 			setImages(staticImages)
+			setPage(1)
+			setTotalPages(1)
 			console.error(error)
 		}
 	}, [data, error])
