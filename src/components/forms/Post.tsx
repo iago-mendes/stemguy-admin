@@ -9,6 +9,7 @@ export interface Post
 {
 	title: string
 	url_id: string
+	date: string
 	time: number
 	
 	image: string
@@ -54,6 +55,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 
 	const [title, setTitle] = useState('')
 	const [urlId, setUrlId] = useState('')
+	const [date, setDate] = useState('')
 	const [time, setTime] = useState(0)
 	const [image, setImage] = useState('')
 	const [author, setAuthor] = useState('')
@@ -107,6 +109,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 		{
 			setTitle(post.title)
 			setUrlId(post.url_id)
+			setDate(post.date)
 			setTime(post.time)
 			setImage(post.image)
 			setAuthor(post.author)
@@ -155,6 +158,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 		{
 			title,
 			url_id: urlId,
+			date,
 			time,
 			image,
 			author,
@@ -199,6 +203,17 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					value={urlId}
 					onChange={e => setUrlId(e.target.value)}
 					placeholder='E.g.: this-is-the-id-that-appears-in-the-url'
+				/>
+			</div>
+			{/* date */}
+			<div className='field'>
+				<label htmlFor='date'>Date</label>
+				<input
+					type='date'
+					name='date'
+					id='date'
+					value={date}
+					onChange={e => setDate(e.target.value)}
 				/>
 			</div>
 			<div className='field'>

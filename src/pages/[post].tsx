@@ -17,6 +17,7 @@ const EditPost: React.FC = () =>
 	{
 		title: '',
 		url_id: '',
+		date: '',
 		time: 0,
 		image: '',
 		author: '',
@@ -34,6 +35,7 @@ const EditPost: React.FC = () =>
 			{
 				title: data.title,
 				url_id: data.url_id,
+				date: data.date,
 				time: data.time,
 				image: data.image,
 				author: data.author,

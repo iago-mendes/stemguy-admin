@@ -39,7 +39,8 @@ const Container = styled.form`
 			font-size: 2rem;
 			color: ${p => p.theme.colors.text};
 
-			padding: 1rem;
+			padding-left: 1rem;
+			padding-right: 1rem;
 
 			transition: 0.25s;
 
@@ -47,6 +48,11 @@ const Container = styled.form`
 			{
 				border-bottom-color: ${p => p.theme.colors.primary};
 			}
+		}
+
+		input[type=date]
+		{
+			cursor: pointer;
 		}
 
 		textarea
