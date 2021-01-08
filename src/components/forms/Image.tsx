@@ -40,6 +40,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 	const [alt, setAlt] = useState('')
 	const [credit, setCredit] = useState('')
 	const [creditLink, setCreditLink] = useState('')
+	const [date, setDate] = useState('')
 
 	useEffect(() =>
 	{
@@ -48,6 +49,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 			setAlt(image.alt)
 			setCredit(image.credit)
 			setCreditLink(image.creditLink)
+			// setDate(image.date)
 		}
 	}, [image])
 
@@ -60,6 +62,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 		data.append('alt', alt)
 		data.append('credit', credit)
 		data.append('creditLink', creditLink)
+		data.append('date', date)
 
 		if (method === 'post')
 			await api.post('images', data).then(() =>
@@ -77,6 +80,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 
 	return (
 		<Container onSubmit={e => e.preventDefault()} >
+			{/* imageFile */}
 			<div className='field'>
 				<label htmlFor='imageFile'>Image file</label>
 				<Dropzone
@@ -86,7 +90,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 					shownFileUrl={image && image.url}
 				/>
 			</div>
-
+			{/* alt */}
 			<div className='field'>
 				<label htmlFor='alt'>Alternative text</label>
 				<input
@@ -97,7 +101,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 					onChange={e => setAlt(e.target.value)}
 				/>
 			</div>
-
+			{/* credit */}
 			<div className='field'>
 				<label htmlFor='credit'>Credit text</label>
 				<input
@@ -108,7 +112,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 					onChange={e => setCredit(e.target.value)}
 				/>
 			</div>
-
+			{/* creditLink */}
 			<div className='field'>
 				<label htmlFor='creditLink'>Credit link</label>
 				<input
@@ -119,7 +123,17 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 					onChange={e => setCreditLink(e.target.value)}
 				/>
 			</div>
-
+			{/* date */}
+			<div className='field'>
+				<label htmlFor='date'>Date</label>
+				<input
+					type='date'
+					name='date'
+					id='date'
+					value={date}
+					onChange={e => setDate(e.target.value)}
+				/>
+			</div>
 			<div className="buttons">
 				<button onClick={Router.back} >Cancel</button>
 				<button onClick={handleSubmit} >Submit</button>

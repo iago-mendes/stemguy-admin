@@ -33,20 +33,25 @@ const Container = styled.form`
 			border: none;
 			border-bottom: ${p => `${p.theme.colors.text}40`} 2px solid;
 
+			height: 2.5rem;
 			font-family: Roboto;
 			font-size: 2rem;
 			color: ${p => p.theme.colors.text};
 
-			padding: 1rem;
-			width: 100%;
-			height: 2.5rem;
+			padding-left: 1rem;
+			padding-right: 1rem;
 
 			transition: 0.25s;
 
 			:focus
 			{
-				border-color: ${p => p.theme.colors.primary};
+				border-bottom-color: ${p => p.theme.colors.primary};
 			}
+		}
+
+		input[type=date]
+		{
+			cursor: pointer;
 		}
 	}
 
