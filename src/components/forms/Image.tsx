@@ -24,6 +24,7 @@ export interface ImageCRUD
 	alt: string
 	credit: string
 	creditLink: string
+	date: string
 }
 
 interface ImageFormProps
@@ -49,7 +50,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 			setAlt(image.alt)
 			setCredit(image.credit)
 			setCreditLink(image.creditLink)
-			// setDate(image.date)
+			setDate(image.date)
 		}
 	}, [image])
 

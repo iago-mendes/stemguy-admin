@@ -11,15 +11,13 @@ const EditImage: React.FC = () =>
 	const Router = useRouter()
 	const {image: imageId} = Router.query
 
-	const [image, setImage] = useState<Image>({id: '', url: '', alt: '', credit: '', creditLink: ''})
+	const [image, setImage] = useState<Image>({id: '', url: '', alt: '', credit: '', creditLink: '', date: ''})
 
 	useEffect(() =>
 	{
-		api.get('images').then(({data}:{data: Image[]}) =>
+		api.get(`images/${imageId}`).then(({data}:{data: Image}) =>
 		{
-			const tmp = data.find(image => image.id == imageId)
-			if (tmp)
-				setImage(tmp)
+			setImage(data)
 		})
 	}, [imageId])
 
