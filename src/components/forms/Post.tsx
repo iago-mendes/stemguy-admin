@@ -69,7 +69,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 
 	useEffect(() =>
 	{
-		api.get('images').then(({data}) =>
+		api.get('images-raw').then(({data}) =>
 		{
 			const tmp: ImageOption[] = data.map(image => (
 			{
