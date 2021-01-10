@@ -119,6 +119,12 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 		}
 	}, [post])
 
+	useEffect(() =>
+	{
+		const tmpUrlId = slugify(title)
+		setUrlId(tmpUrlId)
+	}, [title])
+
 	function handleImageChange(e: ImageOption)
 	{
 		if (!e)
@@ -150,6 +156,18 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 			const tmp: string[] = e.map(flag => flag.value)
 			setFlags(tmp)
 		}
+	}
+
+	function slugify(text: string)
+	{
+		const slug = text.toString().toLowerCase()
+			.replace(/\s+/g, '-')
+			.replace(/[^\w\-]+/g, '')
+			.replace(/\-\-+/g, '-')
+			.replace(/^-+/, '')
+			.replace(/-+$/, '')
+
+		return slug
 	}
 
 	async function handleSubmit()
@@ -202,7 +220,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					id='urlId'
 					value={urlId}
 					onChange={e => setUrlId(e.target.value)}
-					placeholder='E.g.: this-is-the-id-that-appears-in-the-url'
+					placeholder='E.g.: title-of-the-post'
 				/>
 			</div>
 			{/* date */}
