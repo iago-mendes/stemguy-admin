@@ -28,13 +28,13 @@ const Header: React.FC<HeaderProps> = ({display, search, setSearch}) =>
 
 	return (
 		<Container>
-			<div className="group">
+			<div className='group'>
 				{getIcon(display)}
 				<h1>{display}</h1>
 			</div>
-			<div className="inputField">
-				<BiSearch size={25} color='rgb(138, 138, 138)' />
-				<input type="text" name="search" value={search} onChange={e => setSearch(e.target.value)} />
+			<div className='inputField'>
+				<BiSearch size={25} />
+				<input type='text' name='search' value={search} onChange={e => setSearch(e.target.value)} />
 			</div>
 		</Container>
 	)

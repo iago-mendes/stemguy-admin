@@ -31,21 +31,35 @@ const Container = styled.header`
 	{
 		height: 4rem;
 		width: 25rem;
-		border: rgb(138, 138, 138) solid 1px;
+
+		color: ${p => p.theme.colors.textLight}80;
+		border: ${p => p.theme.colors.textLight}80 solid 2px;
 		border-radius: 2rem;
+
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
 		padding: 1rem;
 
+		transition: 0.25s;
+
+		:hover, :focus
+		{
+			color: ${p => p.theme.colors.primary};
+			border-color: ${p => p.theme.colors.primary};
+		}
+
 		input
 		{
 			width: 100%;
 			height: 100%;
 			border: none;
+
 			font-family: Roboto;
-			font-size: 1.5rem;
+			font-weight: 700;
+			font-size: 1.75rem;
+			color: ${p => p.theme.colors.primary};
 		}
 	}
 `
