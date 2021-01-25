@@ -80,7 +80,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 			setImageOptions(tmp)
 		})
 
-		api.get('authors').then(({data}) =>
+		api.get('members').then(({data}) =>
 		{
 			const tmp: AuthorOption[] = data.map(author => (
 			{
