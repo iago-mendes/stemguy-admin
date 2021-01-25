@@ -27,7 +27,7 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 	const [page, setPage] = useState(1)
 	const [totalPages, setTotalPages] = useState(1)
 
-	const {data, error, revalidate} = useSWR(`/api/getImages?search=${search}&page=${page}`)
+	const {data, error} = useSWR(`/api/getImages?search=${search}&page=${page}`)
 	const [images, setImages] = useState<Image[]>(staticImages)
 
 	useEffect(() =>
@@ -47,13 +47,6 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 			console.error(error)
 		}
 	}, [data, error])
-
-	function handleImageClick(e: ReactMouseEvent<HTMLDivElement, MouseEvent>, id: string)
-	{
-		const copy = ['[object HTMLSpanElement]', '[object SVGSVGElement]']
-		if (!copy.includes(String(e.target)))
-			Router.push(`/images/${id}`)
-	}
 
 	function quotes(text: string)
 	{
@@ -95,7 +88,7 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 					? <Loading />
 					: images.length === 0 && search !== ''
 						? (
-							<div className="noResults">
+							<div className='noResults'>
 								<h1>No results found!</h1>
 							</div>
 						)
@@ -103,23 +96,31 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 							<div
 								className='image'
 								key={image.id}
-								onClick={e => handleImageClick(e, image.id)}
 							>
 								<div
-									className="img"
+									className='img'
+									title='Edit image'
+									onClick={() => Router.push(`/images/${image.id}`)}
 								>
 									<NextImage
 										src={image.url}
 										alt={image.alt}
 										width={image.width}
-										height={image.width}
+										height={image.height}
+										layout='responsive'
 										quality={10}
 									/>
 								</div>
-								<h1>{image.alt}</h1>
-								<span className="copy" onClick={() => handleCopyImg(image)}>
-									<FiCopy size={15} />
-								</span>
+								<div className='group'>
+									<h1>{image.alt}</h1>
+									<button
+										className='copy'
+										onClick={() => handleCopyImg(image)}
+										title='Copy Img component'
+									>
+										<FiCopy size={15} />
+									</button>
+								</div>
 							</div>
 				))}
 			</main>
