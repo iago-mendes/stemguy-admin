@@ -1,37 +1,40 @@
 import styled from 'styled-components'
 
 const Container = styled.footer`
+	width: 100%;
+	padding: 1rem;
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 2.5rem;
+	gap: 3rem;
 
-	height: 5vh;
-	min-height: 3rem;
-	
-
-	button
+	.buttons
 	{
-		background: none;
-		border: none;
-		border-radius: 100rem;
-
-		width: 3rem;
-		height: 3rem;
-
 		display: flex;
-		align-items: center;
-		justify-content: center;
+		gap: 1rem;
 
-		color: ${p => p.theme.colors.primary};
-
-		cursor: pointer;
-		transition: 0.25s;
-
-		:hover
+		button
 		{
-			background-color: ${p => p.theme.colors.primary};
-			color: ${p => p.theme.colors.background};
+			background: none;
+			border: none;
+			padding: 0.5rem;
+
+			color: ${p => p.theme.colors.primary};
+			border-radius: 100rem;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			cursor: pointer;
+			transition: 0.25s;
+
+			:hover
+			{
+				color: ${p => p.theme.colors.background};
+				background-color: ${p => p.theme.colors.primary};
+			}
 		}
 	}
 
@@ -39,21 +42,20 @@ const Container = styled.footer`
 	{
 		input
 		{
+			background: none;
 			border: none;
-			border-bottom: ${p => `${p.theme.colors.text}40`} 2px solid;
-
-			width: 5rem;
-			background-color: ${p => p.theme.colors.background};
+			border-bottom: ${p => p.theme.colors.primary}40 2px solid;
 
 			font-family: Roboto;
 			font-size: 1.5rem;
-			color: ${p => p.theme.colors.text};
+			color: ${p => p.theme.colors.primary};
 
-			padding-left: 1rem;
-			padding-right: 1rem;
+			padding-left: 0.5rem;
+			padding-right: 0.5rem;
+			width: 5rem;
 
 			transition: 0.25s;
-
+		
 			:focus, :hover
 			{
 				border-bottom-color: ${p => p.theme.colors.primary};
@@ -75,7 +77,7 @@ const Container = styled.footer`
 		{
 			font-family: Roboto;
 			font-size: 1.5rem;
-			color: ${p => p.theme.colors.text};
+			color: ${p => p.theme.colors.primary};
 		}
 	}
 `
