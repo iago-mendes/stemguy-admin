@@ -1,12 +1,12 @@
 import {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
 import Switch from 'react-switch'
+import {FiMinus, FiPlus} from 'react-icons/fi'
 
 import api from '../../services/api'
-import Container from '../../styles/components/forms/Member'
+import Container from '../../styles/components/forms/global'
 import Dropzone from '../Dropzone'
 import Member from '../../models/member'
-import { FiMinus, FiPlus } from 'react-icons/fi'
 
 interface MemberFormProps
 {
@@ -16,7 +16,7 @@ interface MemberFormProps
 
 const MemberForm: React.FC<MemberFormProps> = ({method, member}) =>
 {
-	const Router = useRouter()
+	const router = useRouter()
 
 	const [imageFile, setImageFile] = useState<File>()
 	const [name, setName] = useState('')
@@ -65,13 +65,13 @@ const MemberForm: React.FC<MemberFormProps> = ({method, member}) =>
 		// 	await api.post('images', data).then(() =>
 		// 	{
 		// 		alert('Image created successfully!')
-		// 		Router.back()
+		// 		router.back()
 		// 	})
 		// else if (method === 'put')
 		// 	await api.put(`images/${member.id}`, data).then(() =>
 		// 	{
 		// 		alert('Image edited successfully!')
-		// 		Router.back()
+		// 		router.back()
 		// 	})
 	}
 
@@ -85,6 +85,7 @@ const MemberForm: React.FC<MemberFormProps> = ({method, member}) =>
 					id='imageFile'
 					onFileUploaded={setImageFile}
 					shownFileUrl={member && member.image}
+					className='dropzone'
 				/>
 			</div>
 			{/* name */}
@@ -118,22 +119,24 @@ const MemberForm: React.FC<MemberFormProps> = ({method, member}) =>
 					id='admin'
 					checked={admin}
 					onChange={setAdmin}
+					className='switch'
 				/>
 			</div>
 			{/* bio */}
-			<div className='field'>
+			<div className='field textarea'>
 				<label htmlFor='bio'>Biography</label>
 				<textarea
 					name='bio'
 					id='bio'
 					value={bio}
 					onChange={e => setBio(e.target.value)}
+					rows={10}
 				/>
 			</div>
 			{/* favTopics */}
 			<div className='field'>
 				<label htmlFor='topic'>Favorite topics</label>
-				<ul>
+				<ul className='list' >
 					{favTopics.map((topic, index) => (
 						<li key={index} >
 							<input
@@ -155,8 +158,8 @@ const MemberForm: React.FC<MemberFormProps> = ({method, member}) =>
 			</div>
 
 			<div className='buttons'>
-				<button type='button' onClick={Router.back} >Cancel</button>
-				<button type='submit' >Submit</button>
+				<button type='button' onClick={router.back} className='cancel' >Cancel</button>
+				<button type='submit' className='submit' >Submit</button>
 			</div>
 		</Container>
 	)

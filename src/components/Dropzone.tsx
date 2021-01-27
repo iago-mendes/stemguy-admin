@@ -12,9 +12,10 @@ interface Props
 
 	name?: string
 	id?: string
+	className?: string
 }
 
-const Dropzone: React.FC<Props> = ({shownFileUrl, onFileUploaded, name, id}) =>
+const Dropzone: React.FC<Props> = ({shownFileUrl, onFileUploaded, name, id, className}) =>
 {
 	const [selectedFileUrl, setSelectedFileUrl] = useState('')
 
@@ -35,7 +36,7 @@ const Dropzone: React.FC<Props> = ({shownFileUrl, onFileUploaded, name, id}) =>
 	const {getRootProps, getInputProps} = useDropzone({onDrop, accept: 'image/*'})
 
 return (
-	<Container {...getRootProps()}>
+	<Container {...getRootProps()} className={className} >
 		<input {...getInputProps()} accept='image/*' name={name} id={id} />
 		{
 			selectedFileUrl !== ''
