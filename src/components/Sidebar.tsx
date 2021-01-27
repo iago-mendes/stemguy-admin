@@ -45,10 +45,10 @@ const Sidebar: React.FC = () =>
 							<span>Flags</span>
 						</a>
 					</Link>
-					<Link href='/'>
+					<Link href='/members'>
 						<a>
 							<BsPeople size={25} />
-							<span>Authors</span>
+							<span>Members</span>
 						</a>
 					</Link>
 				</ul>
