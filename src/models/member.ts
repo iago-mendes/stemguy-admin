@@ -1,3 +1,14 @@
+interface Member
+{
+  id: string
+  name: string
+  image: string
+  role: string
+  admin: boolean
+  bio: string
+  favTopics: string[]
+}
+
 export interface MemberListed
 {
 	id: string
@@ -7,3 +18,5 @@ export interface MemberListed
 	bio: string
 	favTopics: string[]
 }
+
+export default Member
