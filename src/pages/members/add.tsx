@@ -10,9 +10,11 @@ const AddMember: React.FC = () =>
 				<title>Add member | STEM Guy</title>
 			</Head>
 
-			<MemberForm
-				method='post'
-			/>
+			<main>
+				<MemberForm
+					method='post'
+				/>
+			</main>
 		</div>
 	)
 }

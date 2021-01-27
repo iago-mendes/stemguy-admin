@@ -40,14 +40,17 @@ export default createGlobalStyle`
 
 	.form
 	{
-		width: 100%;
-		height: fit-content;
-		min-height: 100%;
-		padding: 5rem;
+		main
+		{
+			width: 100%;
+			height: fit-content;
+			min-height: 100%;
+			padding: 5rem;
 
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+		}
 	}
 `
