@@ -8,11 +8,13 @@ import Container from '../styles/components/Header'
 interface HeaderProps
 {
 	display: string
-	search: string
-	setSearch: Function
+
+	showSearch?: boolean
+	search?: string
+	setSearch?: Function
 }
 
-const Header: React.FC<HeaderProps> = ({display, search, setSearch}) =>
+const Header: React.FC<HeaderProps> = ({display, showSearch = true, search, setSearch}) =>
 {
 	function getIcon(page: string)
 	{
@@ -22,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({display, search, setSearch}) =>
 			return <BsImages size={50} />
 		else if (page === 'Flags')
 			return <AiOutlineTags size={50}/>
-		else if (page === 'Authors')
+		else if (page === 'Members')
 			return <BsPeople size={50} />
 	}
 
@@ -32,10 +34,12 @@ const Header: React.FC<HeaderProps> = ({display, search, setSearch}) =>
 				{getIcon(display)}
 				<h1>{display}</h1>
 			</div>
-			<div className='inputField'>
-				<BiSearch size={25} />
-				<input type='text' name='search' value={search} onChange={e => setSearch(e.target.value)} />
-			</div>
+			{showSearch && (
+				<div className='inputField'>
+					<BiSearch size={25} />
+					<input type='text' name='search' value={search} onChange={e => setSearch(e.target.value)} />
+				</div>
+			)}
 		</Container>
 	)
 }

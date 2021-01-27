@@ -43,7 +43,7 @@ const Members: React.FC<MembersProps> = ({members: staticMembers}) =>
 				<title>Members | STEM Guy</title>
 			</Head>
 
-			<Header display='Members' search={''} setSearch={() => {}} />
+			<Header display='Members' showSearch={false} />
 
 			<Add />
 
