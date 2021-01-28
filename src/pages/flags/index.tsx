@@ -18,7 +18,6 @@ const Flags: React.FC<FlagsProps> = ({flags: staticFlags}) =>
 {
 	const Router = useRouter()
 
-	const [search, setSearch] = useState('')
 	const {data, error} = useSWR('/api/getFlags')
 	const [flags, setFlags] = useState<Flag[]>(staticFlags)
 
@@ -35,7 +34,7 @@ const Flags: React.FC<FlagsProps> = ({flags: staticFlags}) =>
 
 	return (
 		<Container className='page'>
-			<Header display='Flags' search={search} setSearch={setSearch} />
+			<Header display='Flags' showSearch={false} />
 
 			<Add />
 
