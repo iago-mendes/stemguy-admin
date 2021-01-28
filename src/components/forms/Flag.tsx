@@ -2,7 +2,9 @@ import {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
 
 import api from '../../services/api'
-import Container from '../../styles/components/forms/Flag'
+import Container from '../../styles/components/forms/global'
+import successAlert from '../../utils/alerts/success'
+import errorAlert from '../../utils/alerts/error'
 
 export interface Flag
 {
@@ -38,16 +40,26 @@ const FlagForm: React.FC<FlagFormProps> = ({method, flag}) =>
 		const data = {name, color}
 
 		if (method === 'post')
-			await api.post('flags', data).then(() =>
+			await api.post('flags', data)
+			.then(() =>
 			{
-				alert('Flag created successfully!')
+				successAlert('Flag successfully created!')
 				Router.back()
 			})
-		else if (method === 'put')
-			await api.put(`flags/${flag._id}`, data).then(() =>
+			.catch(err =>
 			{
-				alert('Flag edited successfully!')
+				errorAlert(err.response.data.message)
+			})
+		else if (method === 'put')
+			await api.put(`flags/${flag._id}`, data)
+			.then(() =>
+			{
+				successAlert('Flag successfully edited!')
 				Router.back()
+			})
+			.catch(err =>
+			{
+				errorAlert(err.response.data.message)
 			})
 	}
 
@@ -74,8 +86,8 @@ const FlagForm: React.FC<FlagFormProps> = ({method, flag}) =>
 				/>
 			</div>
 			<div className="buttons">
-				<button onClick={Router.back} >Cancel</button>
-				<button onClick={handleSubmit} >Submit</button>
+				<button onClick={Router.back} className='cancel' >Cancel</button>
+				<button onClick={handleSubmit} className='submit' >Submit</button>
 			</div>
 		</Container>
 	)

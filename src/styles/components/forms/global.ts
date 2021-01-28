@@ -58,6 +58,15 @@ const Container = styled.form`
 			cursor: pointer;
 		}
 
+		input[type=color]
+		{
+			border: ${p => `${p.theme.colors.text}40`} 2px solid;
+			cursor: pointer;
+
+			padding: 0;
+			width: 100%;
+		}
+
 		.dropzone, .switch
 		{
 			margin-left: 2rem;
@@ -183,7 +192,7 @@ const Container = styled.form`
 
 		.submit:hover
 		{
-			background-color: ${p => p.theme.colors.buttonRed};
+			background-color: ${p => p.theme.colors.buttonGreen};
 		}
 	}
 `

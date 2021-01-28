@@ -1,9 +1,12 @@
-import {FormEvent, useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import Select, {OptionsType} from 'react-select'
 import {useRouter} from 'next/router'
 
 import api from '../../services/api'
-import Container, {selectStyles} from '../../styles/components/forms/Post'
+import Container from '../../styles/components/forms/global'
+import {selectStyles} from '../../styles/global'
+import successAlert from '../../utils/alerts/success'
+import errorAlert from '../../utils/alerts/error'
 
 export interface Post
 {
@@ -186,16 +189,26 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 		}
 
 		if (method === 'post')
-			await api.post('posts', data).then(() =>
+			await api.post('posts', data)
+			.then(() =>
 			{
-				alert('Post created successfully!')
+				successAlert('Post successfully created!')
 				Router.back()
 			})
-		else if (method === 'put')
-			await api.put(`posts/${id}`, data).then(() =>
+			.catch(err =>
 			{
-				alert('Post edited successfully!')
+				errorAlert(err.response.data.message)
+			})
+		else if (method === 'put')
+			await api.put(`posts/${id}`, data)
+			.then(() =>
+			{
+				successAlert('Post successfully edited!')
 				Router.back()
+			})
+			.catch(err =>
+			{
+				errorAlert(err.response.data.message)
 			})
 	}
 
@@ -282,7 +295,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					placeholder='Selected the flags of the post'
 				/>
 			</div>
-			<div className='field textareaField'>
+			<div className='field textarea'>
 				<label htmlFor='description'>Description</label>
 				<textarea
 					name='description'
@@ -293,7 +306,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					placeholder='Type your description here'
 				/>
 			</div>
-			<div className='field textareaField'>
+			<div className='field textarea'>
 				<label htmlFor='markdown'>Markdown</label>
 				<textarea
 					name='markdown'
@@ -305,8 +318,8 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 				/>
 			</div>
 			<div className="buttons">
-				<button onClick={Router.back} >Cancel</button>
-				<button onClick={handleSubmit} >Submit</button>
+				<button onClick={Router.back} className='cancel' >Cancel</button>
+				<button onClick={handleSubmit} className='submit' >Submit</button>
 			</div>
 		</Container>
 	)

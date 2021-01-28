@@ -2,8 +2,10 @@ import {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
 
 import api from '../../services/api'
-import Container from '../../styles/components/forms/Image'
+import Container from '../../styles/components/forms/global'
 import Dropzone from '../Dropzone'
+import errorAlert from '../../utils/alerts/error'
+import successAlert from '../../utils/alerts/success'
 
 export interface Image
 {
@@ -66,17 +68,27 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 		data.append('date', date)
 
 		if (method === 'post')
-			await api.post('images', data).then(() =>
-			{
-				alert('Image created successfully!')
-				Router.back()
-			})
+			await api.post('images', data)
+				.then(() =>
+				{
+					successAlert('Image successfully created!')
+					Router.back()
+				})
+				.catch(err =>
+				{
+					errorAlert(err.response.data.message)
+				})
 		else if (method === 'put')
-			await api.put(`images/${image.id}`, data).then(() =>
-			{
-				alert('Image edited successfully!')
-				Router.back()
-			})
+			await api.put(`images/${image.id}`, data)
+				.then(() =>
+				{
+					successAlert('Image successfully edited!')
+					Router.back()
+				})
+				.catch(err =>
+				{
+					errorAlert(err.response.data.message)
+				})
 	}
 
 	return (
@@ -136,8 +148,8 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 				/>
 			</div>
 			<div className="buttons">
-				<button onClick={Router.back} >Cancel</button>
-				<button onClick={handleSubmit} >Submit</button>
+				<button onClick={Router.back} className='cancel' >Cancel</button>
+				<button onClick={handleSubmit} className='submit' >Submit</button>
 			</div>
 		</Container>
 	)

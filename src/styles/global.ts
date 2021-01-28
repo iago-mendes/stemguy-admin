@@ -1,4 +1,5 @@
 import {createGlobalStyle} from "styled-components";
+import {Styles} from 'react-select'
 
 export default createGlobalStyle`
 	:root
@@ -54,3 +55,39 @@ export default createGlobalStyle`
 		}
 	}
 `
+
+export const selectStyles: Styles =
+{
+	option: (provided, state) => (
+	{
+		...provided,
+		cursor: 'pointer',
+
+		fontFamily: 'Roboto',
+		fontSize: '1.5rem',
+
+		transition: '0.1s',
+		color: state.isSelected ? '#E6F2FF' : state.isFocused ? '#313131' : '#7B7B7B',
+		backgroundColor: state.isSelected ? '#0D2C54' : '#E6F2FF'
+	}),
+
+	menu: (provided, state) => (
+	{
+		...provided,
+		fontFamily: 'Roboto',
+		backgroundColor: '#E6F2FF'
+	}),
+
+	control: (provided, state) => (
+	{
+		...provided,
+
+		cursor: 'pointer',
+		borderWidth: '2px',
+		borderColor: state.isFocused ? '#0D2C54' : '#31313140',
+		transition: '0.25s',
+
+		fontFamily: 'Roboto',
+		fontSize: '1.5rem'
+	}),
+}
