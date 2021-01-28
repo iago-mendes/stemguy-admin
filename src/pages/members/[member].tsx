@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
 
@@ -21,10 +20,6 @@ const AddMember: React.FC = () =>
 
 	return (
 		<div className='page form'>
-			<Head>
-				<title>Edit member | STEM Guy</title>
-			</Head>
-
 			<Delete collection='members' id={member.id} />
 
 			<main>

@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import {GetStaticProps} from 'next'
 import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
@@ -65,10 +64,6 @@ const Posts: React.FC<PostsProps> = ({posts: staticPosts}) =>
 
 	return (
 		<Container className='page'>
-			<Head>
-				<title>STEM Guy</title>
-			</Head>
-
 			<Header display='Posts' search={search} setSearch={setSearch} />
 
 			<Add />

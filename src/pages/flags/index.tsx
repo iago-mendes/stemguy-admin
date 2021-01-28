@@ -1,5 +1,4 @@
 import { GetStaticProps } from 'next'
-import Head from 'next/head'
 import {useEffect, useState} from 'react'
 import useSWR from 'swr'
 import {useRouter} from 'next/router'
@@ -36,10 +35,6 @@ const Flags: React.FC<FlagsProps> = ({flags: staticFlags}) =>
 
 	return (
 		<Container className='page'>
-			<Head>
-				<title>Flags | STEM Guy</title>
-			</Head>
-
 			<Header display='Flags' search={search} setSearch={setSearch} />
 
 			<Add />

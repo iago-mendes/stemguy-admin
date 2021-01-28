@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import {GetStaticProps} from 'next'
 import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
@@ -39,10 +38,6 @@ const Members: React.FC<MembersProps> = ({members: staticMembers}) =>
 
 	return (
 		<Container className='page'>
-			<Head>
-				<title>Members | STEM Guy</title>
-			</Head>
-
 			<Header display='Members' showSearch={false} />
 
 			<Add />

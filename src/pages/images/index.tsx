@@ -1,5 +1,4 @@
 import {GetStaticProps} from 'next'
-import Head from 'next/head'
 import {useEffect, useState, MouseEvent as ReactMouseEvent} from 'react'
 import useSWR from 'swr'
 import {useRouter} from 'next/router'
@@ -74,10 +73,6 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 
 	return (
 		<Container className='page'>
-			<Head>
-				<title>Images | STEM Guy</title>
-			</Head>
-
 			<Header display='Images' search={search} setSearch={setSearch} />
 
 			<Add />
