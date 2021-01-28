@@ -7,6 +7,8 @@ import api from '../../services/api'
 import Container from '../../styles/components/forms/global'
 import Dropzone from '../Dropzone'
 import Member from '../../models/member'
+import successAlert from '../../utils/alerts/success'
+import errorAlert from '../../utils/alerts/error'
 
 interface MemberFormProps
 {
@@ -59,20 +61,30 @@ const MemberForm: React.FC<MemberFormProps> = ({method, member}) =>
 		const data = new FormData()
 
 		if (imageFile)
-			data.append('member', imageFile)
+			data.append('image', imageFile)
+		data.append('name', name)
+		data.append('role', role)
+		data.append('admin', JSON.stringify(admin))
+		data.append('bio', bio)
+		data.append('favTopics', JSON.stringify(favTopics))
 
-		// if (method === 'post')
-		// 	await api.post('images', data).then(() =>
-		// 	{
-		// 		alert('Image created successfully!')
-		// 		router.back()
-		// 	})
-		// else if (method === 'put')
-		// 	await api.put(`images/${member.id}`, data).then(() =>
-		// 	{
-		// 		alert('Image edited successfully!')
-		// 		router.back()
-		// 	})
+		if (method === 'post')
+			await api.post('members', data)
+				.then(() =>
+				{
+					successAlert('Member successfully created!')
+					router.back()
+				})
+				.catch(err =>
+				{
+					errorAlert(err.response.data.message)
+				})
+		else if (method === 'put')
+			await api.put(`members/${member.id}`, data).then(() =>
+			{
+				alert('Member successfully edited!')
+				router.back()
+			})
 	}
 
 	return (
@@ -159,7 +171,7 @@ const MemberForm: React.FC<MemberFormProps> = ({method, member}) =>
 
 			<div className='buttons'>
 				<button type='button' onClick={router.back} className='cancel' >Cancel</button>
-				<button type='submit' className='submit' >Submit</button>
+				<button type='submit' className='submit' onClick={handleSubmit} >Submit</button>
 			</div>
 		</Container>
 	)
