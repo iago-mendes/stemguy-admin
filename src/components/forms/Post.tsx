@@ -7,6 +7,7 @@ import Container from '../../styles/components/forms/global'
 import {selectStyles} from '../../styles/global'
 import successAlert from '../../utils/alerts/success'
 import errorAlert from '../../utils/alerts/error'
+import getDate from '../../utils/getDate'
 
 export interface Post
 {
@@ -58,7 +59,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 
 	const [title, setTitle] = useState('')
 	const [urlId, setUrlId] = useState('')
-	const [date, setDate] = useState('')
+	const [date, setDate] = useState(getDate())
 	const [time, setTime] = useState(0)
 	const [image, setImage] = useState('')
 	const [author, setAuthor] = useState('')

@@ -6,6 +6,7 @@ import Container from '../../styles/components/forms/global'
 import Dropzone from '../Dropzone'
 import errorAlert from '../../utils/alerts/error'
 import successAlert from '../../utils/alerts/success'
+import getDate from '../../utils/getDate'
 
 export interface Image
 {
@@ -43,7 +44,7 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 	const [alt, setAlt] = useState('')
 	const [credit, setCredit] = useState('')
 	const [creditLink, setCreditLink] = useState('')
-	const [date, setDate] = useState('')
+	const [date, setDate] = useState(getDate())
 
 	useEffect(() =>
 	{
