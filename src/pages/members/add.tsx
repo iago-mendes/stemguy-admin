@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import MemberForm from '../../components/forms/Member'
-import Header from '../../components/Header'
 
 const AddMember: React.FC = () =>
 {

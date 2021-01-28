@@ -31,7 +31,11 @@ const MemberForm: React.FC<MemberFormProps> = ({method, member}) =>
 	{
 		if (member)
 		{
-			
+			setName(member.name)
+			setRole(member.role)
+			setAdmin(member.admin)
+			setBio(member.bio)
+			setFavTopics(member.favTopics)
 		}
 	}, [member])
 
@@ -80,10 +84,15 @@ const MemberForm: React.FC<MemberFormProps> = ({method, member}) =>
 					errorAlert(err.response.data.message)
 				})
 		else if (method === 'put')
-			await api.put(`members/${member.id}`, data).then(() =>
+			await api.put(`members/${member.id}`, data)
+			.then(() =>
 			{
-				alert('Member successfully edited!')
+				successAlert('Member successfully edited!')
 				router.back()
+			})
+			.catch(err =>
+			{
+				errorAlert(err.response.data.message)
 			})
 	}
 

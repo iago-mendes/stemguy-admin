@@ -9,6 +9,17 @@ interface Member
   favTopics: string[]
 }
 
+export const defaultMember: Member =
+{
+  id: '',
+  name: '',
+  image: '',
+  role: '',
+  admin: false,
+  bio: '',
+  favTopics: []
+}
+
 export interface MemberListed
 {
 	id: string
