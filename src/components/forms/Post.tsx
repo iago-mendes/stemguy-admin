@@ -214,6 +214,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 
 	return (
 		<Container onSubmit={e => e.preventDefault()} >
+			{/* title */}
 			<div className='field'>
 				<label htmlFor='title'>Title</label>
 				<input
@@ -225,6 +226,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					placeholder='E.g.: Title of the post'
 				/>
 			</div>
+			{/* urlId */}
 			<div className='field'>
 				<label htmlFor='urlId'>Url identifier</label>
 				<input
@@ -247,6 +249,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					onChange={e => setDate(e.target.value)}
 				/>
 			</div>
+			{/* time */}
 			<div className='field'>
 				<label htmlFor='time'>Time (minutes)</label>
 				<input
@@ -257,6 +260,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					onChange={e => setTime(Number(e.target.value))}
 				/>
 			</div>
+			{/* image */}
 			<div className='field'>
 				<label htmlFor='image'>Image</label>
 				<Select
@@ -269,6 +273,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					placeholder='Select the image of the post'
 				/>
 			</div>
+			{/* author */}
 			<div className='field'>
 				<label htmlFor='author'>Author</label>
 				<Select
@@ -281,6 +286,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					placeholder='Select the author of the post'
 				/>
 			</div>
+			{/* flags */}
 			<div className='field'>
 				<label htmlFor='flags'>Flags</label>
 				<Select
@@ -295,6 +301,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					placeholder='Selected the flags of the post'
 				/>
 			</div>
+			{/* description */}
 			<div className='field textarea'>
 				<label htmlFor='description'>Description</label>
 				<textarea
@@ -306,6 +313,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					placeholder='Type your description here'
 				/>
 			</div>
+			{/* textarea */}
 			<div className='field textarea'>
 				<label htmlFor='markdown'>Markdown</label>
 				<textarea
@@ -317,7 +325,8 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					placeholder='Type your markdown here'
 				/>
 			</div>
-			<div className="buttons">
+
+			<div className='buttons'>
 				<button onClick={Router.back} className='cancel' >Cancel</button>
 				<button onClick={handleSubmit} className='submit' >Submit</button>
 			</div>

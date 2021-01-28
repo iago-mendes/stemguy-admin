@@ -85,7 +85,8 @@ const FlagForm: React.FC<FlagFormProps> = ({method, flag}) =>
 					onChange={e => setColor(e.target.value)}
 				/>
 			</div>
-			<div className="buttons">
+			
+			<div className='buttons'>
 				<button onClick={Router.back} className='cancel' >Cancel</button>
 				<button onClick={handleSubmit} className='submit' >Submit</button>
 			</div>

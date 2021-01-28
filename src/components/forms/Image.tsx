@@ -147,7 +147,8 @@ const ImageForm: React.FC<ImageFormProps> = ({method, image}) =>
 					onChange={e => setDate(e.target.value)}
 				/>
 			</div>
-			<div className="buttons">
+			
+			<div className='buttons'>
 				<button onClick={Router.back} className='cancel' >Cancel</button>
 				<button onClick={handleSubmit} className='submit' >Submit</button>
 			</div>
