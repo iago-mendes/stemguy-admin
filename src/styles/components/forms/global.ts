@@ -67,7 +67,7 @@ const Container = styled.form`
 			width: 100%;
 		}
 
-		.dropzone, .switch
+		.dropzone, .switch, .select
 		{
 			margin-left: 2rem;
 		}

@@ -271,6 +271,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					options={imageOptions}
 					styles={selectStyles}
 					placeholder='Select the image of the post'
+					className='select'
 				/>
 			</div>
 			{/* author */}
@@ -284,6 +285,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					options={authorOptions}
 					styles={selectStyles}
 					placeholder='Select the author of the post'
+					className='select'
 				/>
 			</div>
 			{/* flags */}
@@ -299,6 +301,7 @@ const PostForm: React.FC<PostFormProps> = ({method, id, post}) =>
 					isMulti
 					styles={selectStyles}
 					placeholder='Selected the flags of the post'
+					className='select'
 				/>
 			</div>
 			{/* description */}
