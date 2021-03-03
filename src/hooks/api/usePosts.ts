@@ -34,16 +34,13 @@ const usePosts = (search: string) =>
 		setLoading(false)
 	}
 
-	async function changePage(page: number)
+	function updatePaginate(newPaginate: Paginate)
 	{
-		let tmpPaginate = paginate
-		tmpPaginate.page = page
-		setPaginate(tmpPaginate)
-
-		await updatePosts()
+		setPaginate(newPaginate)
+		updatePosts()
 	}
 
-	return {posts, loading, paginate, setPaginate}
+	return {posts, loading, paginate, setPaginate: updatePaginate}
 }
 
 export default usePosts
