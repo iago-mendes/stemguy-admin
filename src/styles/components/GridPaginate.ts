@@ -24,7 +24,7 @@ const Container = styled.div<ContainerProps>`
 		align-items: center;
 		justify-items: center;
 		
-		padding: 1rem;
+		padding: 5rem 1rem;
 	}
 	
 	.paginate
