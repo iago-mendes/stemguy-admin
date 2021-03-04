@@ -1,51 +1,21 @@
-import {GetStaticProps} from 'next'
-import {useEffect, useState, MouseEvent as ReactMouseEvent} from 'react'
-import useSWR from 'swr'
+import {useState} from 'react'
 import {useRouter} from 'next/router'
 import NextImage from 'next/image'
 import {FiCopy} from 'react-icons/fi'
 
 import Header from '../../components/Header'
-import api from '../../services/api'
 import Container from '../../styles/pages/images/index'
 import Add from '../../components/Add'
 import {Image} from '../../components/forms/Image'
-import PaginateFooter from '../../components/PaginateFooter'
-import Loading from '../../components/Loading'
+import useImages from '../../hooks/api/useImages'
+import GridPaginate from '../../components/GridPaginate'
 
-interface ImagesProps
-{
-	images: Image[]
-}
-
-const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
+const Images: React.FC = () =>
 {
 	const Router = useRouter()
 
 	const [search, setSearch] = useState('')
-	const [page, setPage] = useState(1)
-	const [totalPages, setTotalPages] = useState(1)
-
-	const {data, error} = useSWR(`/api/getImages?search=${search}&page=${page}`)
-	const [images, setImages] = useState<Image[]>(staticImages)
-
-	useEffect(() =>
-	{
-		if (data)
-		{
-			setImages(data.images)
-			setPage(data.paginate.page)
-			setTotalPages(data.paginate.total)
-		}
-		else if (error)
-		{
-			setImages(staticImages)
-			setPage(1)
-			setTotalPages(1)
-
-			console.error(error)
-		}
-	}, [data, error])
+	const {images, loading, paginate, setPaginate} = useImages(search)
 
 	function quotes(text: string)
 	{
@@ -77,62 +47,50 @@ const Images: React.FC<ImagesProps> = ({images: staticImages}) =>
 
 			<Add />
 
-			<main>
-				{
-					!data && search !== ''
-					? <Loading />
-					: images.length === 0 && search !== ''
-						? (
-							<div className='noResults'>
-								<h1>No results found!</h1>
-							</div>
-						)
-						: images.map(image => (
-							<div
-								className='image'
-								key={image.id}
-							>
-								<div
-									className='img'
-									title='Edit image'
-									onClick={() => Router.push(`/images/${image.id}`)}
-								>
-									<NextImage
-										src={image.url}
-										alt={image.alt}
-										width={image.width}
-										height={image.height}
-										layout='responsive'
-										quality={10}
-									/>
-								</div>
-								<div className='group'>
-									<h1>{image.alt}</h1>
-									<button
-										className='copy'
-										onClick={() => handleCopyImg(image)}
-										title='Copy Img component'
-									>
-										<FiCopy size={15} />
-									</button>
-								</div>
-							</div>
-				))}
-			</main>
+			<GridPaginate
+				cardWidth={250}
+				cardHeight={200}
 
-			<PaginateFooter page={page} setPage={setPage} totalPages={totalPages} />
+				paginate={paginate}
+				setPaginate={setPaginate}
+
+				loading={loading}
+				noResults={images.length === 0 && search !== ''}
+			>
+				{images.map(image => (
+					<div
+						className='image'
+						key={image.id}
+					>
+						<div
+							className='img'
+							title='Edit image'
+							onClick={() => Router.push(`/images/${image.id}`)}
+						>
+							<NextImage
+								src={image.url}
+								alt={image.alt}
+								width={image.width}
+								height={image.height}
+								layout='responsive'
+								quality={10}
+							/>
+						</div>
+						<div className='group'>
+							<h1>{image.alt}</h1>
+							<button
+								className='copy'
+								onClick={() => handleCopyImg(image)}
+								title='Copy Img component'
+							>
+								<FiCopy size={15} />
+							</button>
+						</div>
+					</div>
+				))}
+			</GridPaginate>
 		</Container>
 	)
-}
-
-export const getStaticProps: GetStaticProps = async ctx =>
-{
-	const {data: images} = await api.get('images')
-
-	return {
-		props: {images},
-		revalidate: 1
-	}
 }
 
 export default Images
